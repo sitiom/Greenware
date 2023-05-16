@@ -3,6 +3,6 @@ enable-beta-ecosystems: true
 updates:
   # pnpm support: https://github.com/dependabot/dependabot-core/issues/1736
   - package-ecosystem: 'npm'
-    directory: '/'
+    directory: '/client'
     schedule:
       interval: 'daily'

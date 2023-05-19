@@ -1,7 +1,11 @@
 version: 2
 updates:
   # pnpm support: https://github.com/dependabot/dependabot-core/issues/1736
-  - package-ecosystem: 'npm'
-    directory: '/client'
+  # - package-ecosystem: 'npm'
+  #   directory: '/client'
+  #   schedule:
+  #     interval: 'daily'
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
-      interval: 'daily'
+      interval: "daily"

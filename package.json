@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && cap sync",
+    "lint": "next lint",
     "start": "next start",
-    "lint": "next lint"
+    "preview:android": "cap run android --no-sync",
+    "preview:ios": "cap run ios --no-sync"
   },
   "dependencies": {
     "@capacitor/android": "^5.0.3",

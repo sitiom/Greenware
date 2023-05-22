@@ -1,12 +1,12 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'app.vercel.ecosquad.greenware',
-  appName: 'Greenware',
-  webDir: 'out',
+  appId: "app.vercel.ecosquad.greenware",
+  appName: "Greenware",
+  webDir: "out",
   server: {
-    androidScheme: 'https'
-  }
+    androidScheme: "https",
+  },
 };
 
 export default config;

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && cap sync",
+    "build": "next build",
+    "build:mobile": "next build && cap sync",
     "lint": "next lint",
     "start": "next start",
     "preview:android": "cap run android --no-sync",

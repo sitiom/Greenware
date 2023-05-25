@@ -9,11 +9,14 @@
     "start": "next start"
   },
   "dependencies": {
-    "flowbite": "^1.6.5",
-    "flowbite-react": "^0.4.4",
+    "class-variance-authority": "^0.6.0",
+    "clsx": "^1.2.1",
+    "lucide-react": "^0.221.0",
     "next": "13.4.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "tailwind-merge": "^1.12.0",
+    "tailwindcss-animate": "^1.0.5",
     "zustand": "^4.3.8"
   },
   "devDependencies": {

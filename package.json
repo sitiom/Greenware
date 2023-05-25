@@ -5,16 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:mobile": "next build && cap sync",
     "lint": "next lint",
-    "start": "next start",
-    "preview:android": "cap run android --no-sync",
-    "preview:ios": "cap run ios --no-sync"
+    "start": "next start"
   },
   "dependencies": {
-    "@capacitor/android": "^5.0.3",
-    "@capacitor/core": "^5.0.3",
-    "@capacitor/ios": "^5.0.3",
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.4",
     "next": "13.4.3",
@@ -23,7 +17,6 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@capacitor/cli": "^5.0.3",
     "@types/node": "20.2.3",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",

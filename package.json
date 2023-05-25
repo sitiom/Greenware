@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^8.5.1",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "lucide-react": "^0.221.0",

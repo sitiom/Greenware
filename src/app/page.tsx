@@ -3,36 +3,56 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import Footer from "@/components/footer";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const Home: React.FC = () => {
+const Home = () => {
+  const navLinks = [
+    { name: "Home", href: "/home" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "About us", href: "/about" },
+    { name: "Contact", href: "/contact" },
+  ];
+
   return (
     <>
-      <div className="bg-slate-100 pb-16 dark:bg-gray-900">
-        <header className="flex items-center gap-6 border-b p-5 shadow-sm">
-          <Button variant="ghost" className="p-2 md:hidden">
-            <Menu />
-          </Button>
+      <div className="bg-stone-100 dark:bg-background">
+        <header className="container flex items-center gap-6 px-5 pt-8">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="p-2 md:hidden">
+              <Menu />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-screen bg-stone-100 dark:bg-gray-900 md:hidden">
+              <DropdownMenuLabel>Menu</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {navLinks.map(({ name, href }) => (
+                <Link key={name} href={href}>
+                  <DropdownMenuItem>{name}</DropdownMenuItem>
+                </Link>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <img
             src="/images/logo-banner.png"
             className="hidden w-28 md:inline"
             alt="Greenware logo"
           />
           <nav className="hidden space-x-5 font-medium md:flex">
-            <Link className="text-muted-foreground" href="/home">
-              Home
-            </Link>
-            <Link className="text-muted-foreground" href="/pricing">
-              Pricing
-            </Link>
-            <Link className="text-muted-foreground" href="/about">
-              About us
-            </Link>
-            <Link className="text-muted-foreground" href="/contact">
-              Contact
-            </Link>
+            {navLinks.map(({ name, href }) => (
+              <Link className="text-muted-foreground" key={name} href={href}>
+                {name}
+              </Link>
+            ))}
           </nav>
           <div className="flex flex-1 justify-end gap-1">
-            <Button className="text-white dark:bg-green-600">Login</Button>
+            <Button className="text-white">Login</Button>
             <Button variant="ghost">Sign up</Button>
             <ThemeToggle />
           </div>
@@ -45,7 +65,7 @@ const Home: React.FC = () => {
                 recycling and sustainability.
               </span>
             </h1>
-            <Button className="px-5 py-6 text-lg text-white dark:bg-green-600">
+            <Button className="px-5 py-6 text-lg text-white">
               Get started
             </Button>
             <Button className="ml-1 px-5 py-6 text-lg" variant="ghost">
@@ -58,13 +78,13 @@ const Home: React.FC = () => {
             </div>
           </div>
         </section>
+        <img
+          src="/images/wave.png"
+          alt="separator"
+          className="relative top-[4.5rem] h-36 w-full"
+        />
       </div>
-      <img
-        src="/images/wave.png"
-        alt="separator"
-        className="-mt-16 h-36 w-full"
-      />
-      <section className="mt-20">
+      <section className="h-full pb-12 pt-44 dark:bg-black">
         <div className="container mx-auto text-center md:max-w-xl lg:max-w-3xl">
           <h2 className="mb-6 text-3xl font-bold">Testimonials</h2>
           <p className="mb-6 pb-2 md:mb-12 md:pb-0">
@@ -74,6 +94,7 @@ const Home: React.FC = () => {
           </p>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

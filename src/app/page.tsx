@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import Footer from "@/components/footer";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const Home = () => {
   const navLinks = [
@@ -21,6 +29,29 @@ const Home = () => {
     { name: "Contact", href: "/contact" },
   ];
 
+  const testimonials = [
+    {
+      name: "John Doe",
+      role: "CEO, Company XYZ",
+      quote:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum lacus in urna aliquam, sed elementum velit mattis.",
+      avatarSrc: "https://github.com/shadcn.png",
+    },
+    {
+      name: "Jane Smith",
+      role: "Marketing Manager, Company ABC",
+      quote:
+        "Nullam cursus rhoncus massa, eu ultrices arcu tempus vitae. Cras convallis, nibh at iaculis pharetra, diam turpis finibus orci, et convallis turpis enim nec arcu.",
+      avatarSrc: "https://github.com/janesmith.png",
+    },
+    {
+      name: "David Johnson",
+      role: "CTO, Company 123",
+      quote:
+        "Vestibulum eu tristique risus. Nunc mattis consectetur lectus ac lobortis. Fusce id urna eget turpis suscipit interdum.",
+      avatarSrc: "https://github.com/davidjohnson.png",
+    },
+  ];
   return (
     <>
       <div className="bg-stone-100 dark:bg-background">
@@ -84,6 +115,7 @@ const Home = () => {
           className="relative top-[4.5rem] h-36 w-full"
         />
       </div>
+
       <section className="h-full pb-12 pt-44 dark:bg-black">
         <div className="container mx-auto text-center md:max-w-xl lg:max-w-3xl">
           <h2 className="mb-6 text-3xl font-bold">Testimonials</h2>
@@ -93,7 +125,27 @@ const Home = () => {
             totam voluptas nostrum quisquam eum porro a pariatur veniam.
           </p>
         </div>
+        <div className="grid gap-6 p-4 md:grid-cols-3 md:p-12">
+          {testimonials.map((testimonial, index) => (
+            <Card key={index} className="mx-auto max-w-md md:max-w-xl">
+              <CardHeader className="flex flex-col items-center">
+                <Avatar>
+                  <AvatarImage src={testimonial.avatarSrc} />
+                  <AvatarFallback>
+                    {testimonial.name.slice(0, 2)}
+                  </AvatarFallback>
+                </Avatar>
+                <CardTitle>{testimonial.name}</CardTitle>
+                <CardDescription>{testimonial.role}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">{testimonial.quote}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </section>
+
       <Footer />
     </>
   );

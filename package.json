@@ -9,25 +9,34 @@
     "start": "next start"
   },
   "dependencies": {
-    "flowbite": "^1.6.5",
-    "flowbite-react": "^0.4.4",
+    "@ducanh2912/next-pwa": "^8.6.0",
+    "@radix-ui/react-avatar": "^1.0.3",
+    "@radix-ui/react-dropdown-menu": "^2.0.5",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.6.0",
+    "clsx": "^1.2.1",
+    "lucide-react": "^0.241.0",
     "next": "13.4.4",
+    "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "tailwind-merge": "^1.13.1",
+    "tailwindcss-animate": "^1.0.6",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@types/node": "20.2.3",
-    "@types/react": "18.2.7",
+    "@types/node": "20.2.6",
+    "@types/react": "18.2.10",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
-    "eslint": "8.41.0",
+    "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "postcss": "8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "simple-zustand-devtools": "^1.1.0",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.1.3"
   }
 }

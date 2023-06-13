@@ -43,3 +43,10 @@ next-env.d.ts
 !.vscode/*.code-snippets
 # local history for vscode
 .history/
+
+# next-pwa
+**/public/workbox**
+**/public/sw**
+**/public/worker**
+**/public/fallback**
+**/public/precache**

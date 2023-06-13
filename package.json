@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.25.0",
-    "flowbite": "^1.6.5",
-    "flowbite-react": "^0.4.7",
     "next": "13.4.5",
     "@ducanh2912/next-pwa": "^8.6.0",
     "@radix-ui/react-avatar": "^1.0.3",

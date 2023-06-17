@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@ducanh2912/next-pwa':
-    specifier: ^8.6.0
-    version: 8.6.0(next@13.4.5)(webpack@5.86.0)
+    specifier: ^8.7.1
+    version: 8.7.1(next@13.4.5)(webpack@5.86.0)
   '@radix-ui/react-avatar':
     specifier: ^1.0.3
     version: 1.0.3(@types/react-dom@18.2.5)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0)
@@ -1322,8 +1322,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
-  /@ducanh2912/next-pwa@8.6.0(next@13.4.5)(webpack@5.86.0):
-    resolution: {integrity: sha512-Bx5iFWMIo+xQXugqZu7jHIjgwmUz65f4ulWcMGglkjzg+7SNcB32iHBZDQuKrsSHAcZ3Z4CA3g3mYUjq4VtOUQ==}
+  /@ducanh2912/next-pwa@8.7.1(next@13.4.5)(webpack@5.86.0):
+    resolution: {integrity: sha512-VELj7dWHMPJPqMjmY6X0xzINo/r/SLZbDRncPNMVd91cVEnvq0SJDIG7s9m/TxlPt+7MEQlQKYgl3sQk7rPiMQ==}
     peerDependencies:
       next: '>=9.1.0'
       webpack: '>=5.9.0'

@@ -1,0 +1,23 @@
+name: Combine Dependabot PRs
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  combine-prs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: npm
+        uses: github/combine-prs@v3.1.1
+        with:
+          branch_prefix: "dependabot/npm_and_yarn"
+          pr_title: "chore(deps): bump npm dependencies"
+          labels: "dependencies,combined-pr"

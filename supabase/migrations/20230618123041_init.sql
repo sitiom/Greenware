@@ -57,8 +57,7 @@ create table "public"."profiles" (
     "id" uuid not null,
     "updated_at" timestamp with time zone,
     "username" text,
-    "first_name" text,
-    "last_name" text,
+    "full_name" text,
     "avatar_url" text
 );
 

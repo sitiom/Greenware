@@ -20,8 +20,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Database } from "@/lib/database.types";
+import {
+  createServerActionClient,
+  createServerComponentClient,
+} from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-const Home = () => {
+const Home = async () => {
   const navLinks = [
     { name: "Home", href: "/home" },
     { name: "Pricing", href: "/pricing" },
@@ -52,6 +59,26 @@ const Home = () => {
       avatarSrc: "https://github.com/davidjohnson.png",
     },
   ];
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  const handleSignIn = async () => {
+    "use server";
+
+    const supabase = createServerActionClient<Database>({ cookies });
+    const { data } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "http://localhost:3000/auth/callback",
+      },
+    });
+    if (data.url) {
+      redirect(data.url);
+    }
+  };
+
   return (
     <>
       <div className="bg-stone-100 dark:bg-background">
@@ -82,9 +109,16 @@ const Home = () => {
               </Link>
             ))}
           </nav>
-          <div className="flex flex-1 justify-end gap-1">
-            <Button className="text-white">Login</Button>
-            <Button variant="ghost">Sign up</Button>
+          <div className="flex flex-1 items-center justify-end gap-1">
+            {session ? (
+              <p>Logged in!</p>
+            ) : (
+              <form>
+                <Button className="text-white" formAction={handleSignIn}>
+                  Login
+                </Button>
+              </form>
+            )}
             <ThemeToggle />
           </div>
         </header>

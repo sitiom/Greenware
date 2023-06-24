@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 import Footer from "@/components/footer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -21,12 +20,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Database } from "@/lib/database.types";
-import {
-  createServerActionClient,
-  createServerComponentClient,
-} from "@supabase/auth-helpers-nextjs";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { signIn } from "@/actions";
+import NavProfile from "@/components/NavProfile";
 
 const Home = async () => {
   const navLinks = [
@@ -63,21 +60,11 @@ const Home = async () => {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
-  const handleSignIn = async () => {
-    "use server";
-
-    const supabase = createServerActionClient<Database>({ cookies });
-    const { data } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "http://localhost:3000/auth/callback",
-      },
-    });
-    if (data.url) {
-      redirect(data.url);
-    }
-  };
+  const { data: userData } = await supabase
+    .from("profiles")
+    .select("full_name, avatar_url")
+    .match({ id: session?.user.id });
+  const user = userData?.[0];
 
   return (
     <>
@@ -110,22 +97,21 @@ const Home = async () => {
             ))}
           </nav>
           <div className="flex flex-1 items-center justify-end gap-1">
-            {session ? (
-              <p>Logged in!</p>
+            {session && user ? (
+              <NavProfile session={session} profile={user} />
             ) : (
               <form>
-                <Button className="text-white" formAction={handleSignIn}>
+                <Button className="text-white" formAction={signIn}>
                   Login
                 </Button>
               </form>
             )}
-            <ThemeToggle />
           </div>
         </header>
         <section className="container flex flex-col items-center gap-12 px-14 pb-14 pt-8 text-center md:flex-row md:text-left">
           <div className="my-8 flex-1">
             <h1 className="mb-12 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl">
-              Promotes <br />
+              Promote <br />
               <span className="text-green-800">
                 recycling and sustainability.
               </span>
@@ -179,7 +165,6 @@ const Home = async () => {
           ))}
         </div>
       </section>
-
       <Footer />
     </>
   );

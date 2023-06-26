@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 import withPWAInit from "@ducanh2912/next-pwa";
+import "./src/env.mjs";
 
 const withPWA = withPWAInit({
   dest: "public",
@@ -7,4 +8,7 @@ const withPWA = withPWAInit({
 
 export default withPWA({
   reactStrictMode: true,
+  experimental: {
+    serverActions: true,
+  },
 });

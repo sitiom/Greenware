@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 import Footer from "@/components/footer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -20,8 +19,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Database } from "@/lib/database.types";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { signIn } from "@/actions";
+import NavProfile from "@/components/NavProfile";
 
-const Home = () => {
+const Home = async () => {
   const navLinks = [
     { name: "Home", href: "/home" },
     { name: "Pricing", href: "/pricing" },
@@ -52,6 +56,16 @@ const Home = () => {
       avatarSrc: "https://github.com/davidjohnson.png",
     },
   ];
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const { data: userData } = await supabase
+    .from("profiles")
+    .select("full_name, avatar_url")
+    .match({ id: session?.user.id });
+  const user = userData?.[0];
+
   return (
     <>
       <div className="bg-stone-100 dark:bg-background">
@@ -82,16 +96,22 @@ const Home = () => {
               </Link>
             ))}
           </nav>
-          <div className="flex flex-1 justify-end gap-1">
-            <Button className="text-white">Login</Button>
-            <Button variant="ghost">Sign up</Button>
-            <ThemeToggle />
+          <div className="flex flex-1 items-center justify-end gap-1">
+            {session && user ? (
+              <NavProfile session={session} profile={user} />
+            ) : (
+              <form>
+                <Button className="text-white" formAction={signIn}>
+                  Login
+                </Button>
+              </form>
+            )}
           </div>
         </header>
         <section className="container flex flex-col items-center gap-12 px-14 pb-14 pt-8 text-center md:flex-row md:text-left">
           <div className="my-8 flex-1">
             <h1 className="mb-12 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl">
-              Promotes <br />
+              Promote <br />
               <span className="text-green-800">
                 recycling and sustainability.
               </span>
@@ -145,7 +165,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-
       <Footer />
     </>
   );

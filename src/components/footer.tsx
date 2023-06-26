@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Footer() {
   return (
@@ -118,7 +119,12 @@ export default function Footer() {
               alt="Logo"
             />
           </Link>
-          <p className="text-center text-sm text-gray-500">© 2023 Greenware.</p>
+          <div className="flex items-center gap-1">
+            <p className="text-center text-sm text-gray-500">
+              © 2023 Greenware.
+            </p>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </footer>

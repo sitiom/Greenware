@@ -95,8 +95,8 @@ devDependencies:
     specifier: ^1.1.0
     version: 1.1.0(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)(zustand@4.3.8)
   supabase:
-    specifier: ^1.68.6
-    version: 1.68.6
+    specifier: ^1.74.2
+    version: 1.74.2
   tailwindcss:
     specifier: 3.3.2
     version: 3.3.2
@@ -5419,8 +5419,8 @@ packages:
       pirates: 4.0.5
       ts-interface-checker: 0.1.13
 
-  /supabase@1.68.6:
-    resolution: {integrity: sha512-3+0SBoY4oRZ1GkDUkMaUfsIAk0ofhw0EntJJo+GZNrciXE0lDZ7AX31g63AyJ1yfNxElbYBcrWIMtsZgeDG35w==}
+  /supabase@1.74.2:
+    resolution: {integrity: sha512-cOuEi4DUVNMoAX1VWC6FizRb9OHnMFKD37L8Wi9U+HgDmgzIFMX7LdCXAflC5jGF+Xvix4/iPaff7fBHDMlvPw==}
     engines: {npm: '>=8'}
     hasBin: true
     requiresBuild: true

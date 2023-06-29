@@ -25,7 +25,7 @@ import { cookies } from "next/headers";
 import { signIn } from "@/actions";
 import NavProfile from "@/components/NavProfile";
 
-const Home = async () => {
+export default async function LandingPage() {
   const navLinks = [
     { name: "Home", href: "/home" },
     { name: "Pricing", href: "/pricing" },
@@ -168,6 +168,4 @@ const Home = async () => {
       <Footer />
     </>
   );
-};
-
-export default Home;
+}

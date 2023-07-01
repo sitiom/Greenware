@@ -22,11 +22,15 @@ export default async function NavProfile({ session, profile }: NavAvatarProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+        <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
           <Avatar className="h-10 w-10">
             <AvatarImage src={profile.avatar_url ?? ""} />
             <AvatarFallback>
-              {profile.full_name?.[0].toUpperCase()}
+              {profile.full_name
+                ?.split(" ")
+                .map((name) => name.charAt(0))
+                .join("")
+                .toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </Button>

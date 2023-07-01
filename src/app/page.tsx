@@ -28,7 +28,6 @@ import NavProfile from "@/components/NavProfile";
 export default async function LandingPage() {
   const navLinks = [
     { name: "Home", href: "/home" },
-    { name: "Pricing", href: "/pricing" },
     { name: "About us", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];

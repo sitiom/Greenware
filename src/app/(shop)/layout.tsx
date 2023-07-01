@@ -1,3 +1,6 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/footer";
+
 interface ShopLayoutProps {
   children: React.ReactNode;
 }
@@ -5,8 +8,9 @@ interface ShopLayoutProps {
 export default function ShopLayout({ children }: ShopLayoutProps) {
   return (
     <>
-      {/* TODO: Add navbar */}
+      <Navbar />
       {children}
+      <Footer />
     </>
   );
 }

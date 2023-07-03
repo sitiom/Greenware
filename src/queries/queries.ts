@@ -1,5 +1,8 @@
+import { Database } from "@/lib/database.types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { supabase } from "@/utils/supabase";
+import { cookies } from "next/headers";
+
+const supabase = createServerComponentClient<Database>({ cookies });
 
 export async function getProducts () {
   const {data, error} = await supabase.from("products").select('id, name, price, url, average_rating');

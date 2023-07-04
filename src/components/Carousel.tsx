@@ -49,7 +49,11 @@ export default function Carousel() {
             } duration-[600ms] relative float-left -mr-[100%] w-full transition-transform ease-in-out motion-reduce:transition-none`}
             style={{ backfaceVisibility: "hidden" }}
           >
-            <img src={image} className="block w-full max-h-[800px] object-cover filter brightness-50 blur-sm" alt="..." />
+            <img
+              src={image}
+              className="block max-h-[800px] w-full object-cover blur-sm brightness-50 filter"
+              alt="..."
+            />
             <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
               <h5 className="text-xl">Slide {index + 1} label</h5>
               <p>

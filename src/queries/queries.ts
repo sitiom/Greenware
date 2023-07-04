@@ -44,9 +44,9 @@ export async function checkOutCart(product_ids : number[], shipping_address_id: 
     status: 'pending payment',
   }).select();
   const {count: lineItemsCount, error: countError} = await supabase.from('line_items').select('*', {count: 'exact', head: true});
-  const newProducts = products?.map(product => {
+  const newProducts = products?.map((product, index) => {
     return {
-      id: lineItemsCount! + 1,
+      id: lineItemsCount! + 1 + index,
       cart_prod_id: product.id,
       order_id: order![0].id,
       created_at: new Date().toString(),

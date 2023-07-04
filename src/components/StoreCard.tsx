@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,17 +6,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { UsersResponseItem } from "@/lib/queries";
 
-export default function StoreCard() {
+interface StoreCardProps {
+  user: UsersResponseItem;
+}
+
+export default function StoreCard({ user }: StoreCardProps) {
   return (
     <Card className="h-full overflow-hidden rounded-sm border bg-card text-card-foreground shadow-sm">
       <CardHeader>
-        <CardTitle>Electronics Title</CardTitle>
-        <CardDescription>₱ 100</CardDescription>
+        <img
+          src={user.avatar_url ?? "https://github.com/shadcn.png"}
+          alt="Avatar"
+        />
+        <CardTitle>{user.full_name}</CardTitle>
+        <CardDescription>Welcome to my store!</CardDescription>
       </CardHeader>
       <CardFooter className="flex w-full flex-col items-center gap-2 sm:flex-row sm:justify-between">
         <Button className="inline-flex w-full items-center justify-center">
-          View product
+          View store
         </Button>
       </CardFooter>
     </Card>

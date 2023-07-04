@@ -11,6 +11,18 @@ export async function getProducts(supabaseClient: SupabaseClient<Database>) {
     .from("products")
     .select("id, name, price, url, average_rating");
 }
+type ProductsResponse = Awaited<ReturnType<typeof getProducts>>;
+export type ProductsResponseSuccess = ProductsResponse["data"];
+export type ProductsResponseItem = NonNullable<ProductsResponseSuccess>[number];
+
+export async function getUsers(supabaseClient: SupabaseClient<Database>) {
+  return await supabaseClient
+    .from("profiles")
+    .select("id, full_name, avatar_url");
+}
+type UsersResponse = Awaited<ReturnType<typeof getUsers>>;
+export type UsersResponseSuccess = UsersResponse["data"];
+export type UsersResponseItem = NonNullable<UsersResponseSuccess>[number];
 
 export async function getProductById(
   supabaseClient: SupabaseClient<Database>,

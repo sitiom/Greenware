@@ -4,12 +4,16 @@ import StoreCard from "@/components/StoreCard";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { Database } from "@/lib/database.types";
+import { getProducts, getUsers } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Browse",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
   const categories = [
     {
       image:
@@ -32,6 +36,9 @@ export default function HomePage() {
       text: "Your Text Here 4",
     },
   ];
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const { data: products } = await getProducts(supabase);
+  const { data: users } = await getUsers(supabase);
 
   return (
     <>
@@ -80,11 +87,9 @@ export default function HomePage() {
             </div>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {products?.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
       </section>
@@ -92,14 +97,13 @@ export default function HomePage() {
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">
-              Featured Store
+              Featured Stores
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <StoreCard />
-            <StoreCard />
-            <StoreCard />
-            <StoreCard />
+            {users?.map((user) => (
+              <StoreCard key={user.id} user={user} />
+            ))}
           </div>
         </div>
       </section>

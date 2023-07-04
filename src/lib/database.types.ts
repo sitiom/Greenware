@@ -7,32 +7,54 @@ export type Json =
   | Json[]
 
 export interface Database {
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          operationName?: string
+          query?: string
+          variables?: Json
+          extensions?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       cart_products: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: number
           product_id: number | null
           profile_id: string | null
           quantity: number | null
-          total: number | null
         }
         Insert: {
-          created_at?: string | null
-          id: number
-          product_id?: number | null
-          profile_id?: string | null
-          quantity?: number | null
-          total?: number | null
-        }
-        Update: {
-          created_at?: string | null
+          created_at?: string
           id?: number
           product_id?: number | null
           profile_id?: string | null
           quantity?: number | null
-          total?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          product_id?: number | null
+          profile_id?: string | null
+          quantity?: number | null
         }
         Relationships: [
           {
@@ -56,7 +78,7 @@ export interface Database {
           profile_id: string | null
         }
         Insert: {
-          id: number
+          id?: number
           product_id?: number | null
           profile_id?: string | null
         }
@@ -83,19 +105,19 @@ export interface Database {
       line_items: {
         Row: {
           cart_prod_id: number | null
-          created_at: string | null
+          created_at: string
           id: number
           order_id: number | null
         }
         Insert: {
           cart_prod_id?: number | null
-          created_at?: string | null
-          id: number
+          created_at?: string
+          id?: number
           order_id?: number | null
         }
         Update: {
           cart_prod_id?: number | null
-          created_at?: string | null
+          created_at?: string
           id?: number
           order_id?: number | null
         }
@@ -116,19 +138,19 @@ export interface Database {
       }
       orders: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: number
           shipping_address_id: number | null
           status: string | null
         }
         Insert: {
-          created_at?: string | null
-          id: number
+          created_at?: string
+          id?: number
           shipping_address_id?: number | null
           status?: string | null
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           id?: number
           shipping_address_id?: number | null
           status?: string | null
@@ -138,7 +160,7 @@ export interface Database {
       products: {
         Row: {
           average_rating: number | null
-          created_at: string | null
+          created_at: string
           discount: number | null
           discount_price: number | null
           id: number
@@ -149,10 +171,10 @@ export interface Database {
         }
         Insert: {
           average_rating?: number | null
-          created_at?: string | null
+          created_at?: string
           discount?: number | null
           discount_price?: number | null
-          id: number
+          id?: number
           name?: string | null
           price?: number | null
           profile_id?: string | null
@@ -160,7 +182,7 @@ export interface Database {
         }
         Update: {
           average_rating?: number | null
-          created_at?: string | null
+          created_at?: string
           discount?: number | null
           discount_price?: number | null
           id?: number
@@ -211,7 +233,7 @@ export interface Database {
       }
       reviews: {
         Row: {
-          created_at: string | null
+          created_at: string
           description: string | null
           id: number
           product_id: number | null
@@ -220,16 +242,16 @@ export interface Database {
           title: string | null
         }
         Insert: {
-          created_at?: string | null
+          created_at?: string
           description?: string | null
-          id: number
+          id?: number
           product_id?: number | null
           profile_id?: string | null
           rating?: number | null
           title?: string | null
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           description?: string | null
           id?: number
           product_id?: number | null
@@ -255,7 +277,7 @@ export interface Database {
       salvaged_devices: {
         Row: {
           brand: string | null
-          created_at: string | null
+          created_at: string
           id: number
           is_working: boolean | null
           memory: string | null
@@ -267,8 +289,8 @@ export interface Database {
         }
         Insert: {
           brand?: string | null
-          created_at?: string | null
-          id: number
+          created_at?: string
+          id?: number
           is_working?: boolean | null
           memory?: string | null
           name?: string | null
@@ -279,7 +301,7 @@ export interface Database {
         }
         Update: {
           brand?: string | null
-          created_at?: string | null
+          created_at?: string
           id?: number
           is_working?: boolean | null
           memory?: string | null
@@ -300,15 +322,15 @@ export interface Database {
       }
       salvaged_parts: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: number
         }
         Insert: {
-          created_at?: string | null
-          id: number
+          created_at?: string
+          id?: number
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           id?: number
         }
         Relationships: []
@@ -318,7 +340,7 @@ export interface Database {
           address_line_one: string | null
           address_line_two: string | null
           barangay: string | null
-          created_at: string | null
+          created_at: string
           full_name: string | null
           id: number
           postal_code: number | null
@@ -330,9 +352,9 @@ export interface Database {
           address_line_one?: string | null
           address_line_two?: string | null
           barangay?: string | null
-          created_at?: string | null
+          created_at?: string
           full_name?: string | null
-          id: number
+          id?: number
           postal_code?: number | null
           profile_id?: string | null
           province?: string | null
@@ -342,7 +364,7 @@ export interface Database {
           address_line_one?: string | null
           address_line_two?: string | null
           barangay?: string | null
-          created_at?: string | null
+          created_at?: string
           full_name?: string | null
           id?: number
           postal_code?: number | null
@@ -365,6 +387,191 @@ export interface Database {
     }
     Functions: {
       [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+  storage: {
+    Tables: {
+      buckets: {
+        Row: {
+          allowed_mime_types: string[] | null
+          avif_autodetection: boolean | null
+          created_at: string | null
+          file_size_limit: number | null
+          id: string
+          name: string
+          owner: string | null
+          public: boolean | null
+          updated_at: string | null
+        }
+        Insert: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
+          created_at?: string | null
+          file_size_limit?: number | null
+          id: string
+          name: string
+          owner?: string | null
+          public?: boolean | null
+          updated_at?: string | null
+        }
+        Update: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
+          created_at?: string | null
+          file_size_limit?: number | null
+          id?: string
+          name?: string
+          owner?: string | null
+          public?: boolean | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "buckets_owner_fkey"
+            columns: ["owner"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      migrations: {
+        Row: {
+          executed_at: string | null
+          hash: string
+          id: number
+          name: string
+        }
+        Insert: {
+          executed_at?: string | null
+          hash: string
+          id: number
+          name: string
+        }
+        Update: {
+          executed_at?: string | null
+          hash?: string
+          id?: number
+          name?: string
+        }
+        Relationships: []
+      }
+      objects: {
+        Row: {
+          bucket_id: string | null
+          created_at: string | null
+          id: string
+          last_accessed_at: string | null
+          metadata: Json | null
+          name: string | null
+          owner: string | null
+          path_tokens: string[] | null
+          updated_at: string | null
+          version: string | null
+        }
+        Insert: {
+          bucket_id?: string | null
+          created_at?: string | null
+          id?: string
+          last_accessed_at?: string | null
+          metadata?: Json | null
+          name?: string | null
+          owner?: string | null
+          path_tokens?: string[] | null
+          updated_at?: string | null
+          version?: string | null
+        }
+        Update: {
+          bucket_id?: string | null
+          created_at?: string | null
+          id?: string
+          last_accessed_at?: string | null
+          metadata?: Json | null
+          name?: string | null
+          owner?: string | null
+          path_tokens?: string[] | null
+          updated_at?: string | null
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "objects_bucketId_fkey"
+            columns: ["bucket_id"]
+            referencedRelation: "buckets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "objects_owner_fkey"
+            columns: ["owner"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      can_insert_object: {
+        Args: {
+          bucketid: string
+          name: string
+          owner: string
+          metadata: Json
+        }
+        Returns: undefined
+      }
+      extension: {
+        Args: {
+          name: string
+        }
+        Returns: string
+      }
+      filename: {
+        Args: {
+          name: string
+        }
+        Returns: string
+      }
+      foldername: {
+        Args: {
+          name: string
+        }
+        Returns: unknown
+      }
+      get_size_by_bucket: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          size: number
+          bucket_id: string
+        }[]
+      }
+      search: {
+        Args: {
+          prefix: string
+          bucketname: string
+          limits?: number
+          levels?: number
+          offsets?: number
+          search?: string
+          sortcolumn?: string
+          sortorder?: string
+        }
+        Returns: {
+          name: string
+          id: string
+          updated_at: string
+          created_at: string
+          last_accessed_at: string
+          metadata: Json
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

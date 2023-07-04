@@ -37,13 +37,17 @@ export async function addToCart(product_id: number, profile_id: string) {
 
 export async function checkOutCart(product_ids : number[], shipping_address_id: number) {
   const {data: products, error: productsError} = await supabase.from("cart_products").select().filter('id', 'in', `(${product_ids.toString()})`);
+  if(productsError) return {data: null, error: productsError};
   const {count: ordersCount, error: orderCountError} = await supabase.from("orders").select('*', {count: 'exact', head: true});
+  if(orderCountError) return {data: null, error: orderCountError};
   const {data: order, error: orderError} = await supabase.from("orders").insert({
     id: ordersCount! + 1,
     shipping_address_id,
     status: 'pending payment',
   }).select();
-  const {count: lineItemsCount, error: countError} = await supabase.from('line_items').select('*', {count: 'exact', head: true});
+  if(orderError) return {data: null, error: orderError};
+  const {count: lineItemsCount, error: lineItemsCountError} = await supabase.from('line_items').select('*', {count: 'exact', head: true});
+  if(lineItemsCountError) return {data: null, error: lineItemsCountError};
   const newProducts = products?.map((product, index) => {
     return {
       id: lineItemsCount! + 1 + index,

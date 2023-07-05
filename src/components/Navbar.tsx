@@ -26,11 +26,12 @@ export default async function Navbar() {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  const { data: userData } = await supabase
+  const { data: user } = await supabase
     .from("profiles")
     .select("full_name, avatar_url")
-    .match({ id: session?.user.id });
-  const user = userData?.[0];
+    .eq("id", session?.user.id)
+    .limit(1)
+    .single();
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background py-4">

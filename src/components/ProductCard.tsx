@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,14 +8,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ProductsResponseItem } from "@/lib/queries";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ProductCardProps {
   product: ProductsResponseItem;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const router = useRouter();
   return (
     <Card className="flex h-full flex-col overflow-hidden rounded-sm border bg-card text-card-foreground shadow-sm">
       <CardHeader className="flex-1">
@@ -40,9 +37,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Button
           variant="outline"
           className="inline-flex w-full items-center justify-center"
-          onClick={() => router.push(`/product/${product.id}`)}
+          asChild
         >
-          Preview
+          <Link href={`/product/${product.id}`}>Preview</Link>
         </Button>
         <Button className="inline-flex w-full items-center justify-center">
           Add to Cart

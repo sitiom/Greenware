@@ -14,6 +14,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database.types";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { getUserById } from "@/lib/queries";
 
 export default async function Navbar() {
   const navLinks = [
@@ -26,12 +27,7 @@ export default async function Navbar() {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  const { data: user } = await supabase
-    .from("profiles")
-    .select("full_name, avatar_url")
-    .eq("id", session?.user.id)
-    .limit(1)
-    .single();
+  const { data: user } = await getUserById(supabase, session?.user.id ?? "");
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background py-4">

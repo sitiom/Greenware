@@ -24,6 +24,20 @@ type UsersResponse = Awaited<ReturnType<typeof getUsers>>;
 export type UsersResponseSuccess = UsersResponse["data"];
 export type UsersResponseItem = NonNullable<UsersResponseSuccess>[number];
 
+export async function getUserById(
+  supabaseClient: SupabaseClient<Database>,
+  id: string
+) {
+  return await supabaseClient
+    .from("profiles")
+    .select("id, full_name, avatar_url")
+    .eq("id", id)
+    .limit(1)
+    .single();
+}
+type UserResponse = Awaited<ReturnType<typeof getUserById>>;
+export type UserResponseSuccess = UserResponse["data"];
+
 export async function getProductById(
   supabaseClient: SupabaseClient<Database>,
   id: number
@@ -34,6 +48,16 @@ export async function getProductById(
     .eq("id", id)
     .limit(1)
     .single();
+}
+
+export async function getProductsByUserId(
+  supabaseClient: SupabaseClient<Database>,
+  uuid: string
+) {
+  return await supabaseClient
+    .from("products")
+    .select("id, name, price, url, average_rating")
+    .eq("profile_id", uuid);
 }
 
 export async function addProduct(

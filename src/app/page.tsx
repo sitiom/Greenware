@@ -24,6 +24,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { signIn } from "@/actions";
 import NavProfile from "@/components/NavProfile";
+import { getUserById } from "@/lib/queries";
 
 export default async function LandingPage() {
   const navLinks = [
@@ -59,11 +60,7 @@ export default async function LandingPage() {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  const { data: userData } = await supabase
-    .from("profiles")
-    .select("full_name, avatar_url")
-    .match({ id: session?.user.id });
-  const user = userData?.[0];
+  const { data: user } = await getUserById(supabase, session?.user.id ?? "");
 
   return (
     <>

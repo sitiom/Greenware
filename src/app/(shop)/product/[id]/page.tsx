@@ -1,9 +1,7 @@
 import { type Metadata } from "next";
 import BreadCrumbs from "@/components/BreadCrumbs";
 import QuantityButton from "@/components/Quantity";
-import Image from "next/image";
 import Link from "next/link";
-import { Command } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -31,6 +29,18 @@ export default async function ProductPage({
 }: ProductPageProps) {
   const supabase = createServerComponentClient<Database>({ cookies });
   const { data: product } = await getProductById(supabase, id);
+  const description = `Introducing the EcoRecycle Pro, a reliable and efficient \
+ solution for managing electronic waste. This compact device is \
+ designed to simplify the process of recycling and disposing of \
+ your old electronic devices responsibly. With advanced \
+ technology and a user-friendly interface, the EcoRecycle Pro \
+ ensures that valuable resources are recovered and harmful \
+ materials are handled safely. Whether you're an individual or \
+ a business, this innovative e-waste product offers a \
+ convenient and sustainable way to declutter your space and \
+ contribute to a greener future. Embrace responsible electronic \
+ waste management with the EcoRecycle Pro today.
+  `;
 
   return (
     <section className="container items-center  gap-8 pb-8 pt-6 md:py-8">
@@ -64,19 +74,7 @@ export default async function ProductPage({
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger>Description</AccordionTrigger>
-                <AccordionContent>
-                  Introducing the EcoRecycle Pro, a reliable and efficient
-                  solution for managing electronic waste. This compact device is
-                  designed to simplify the process of recycling and disposing of
-                  your old electronic devices responsibly. With advanced
-                  technology and a user-friendly interface, the EcoRecycle Pro
-                  ensures that valuable resources are recovered and harmful
-                  materials are handled safely. Whether you're an individual or
-                  a business, this innovative e-waste product offers a
-                  convenient and sustainable way to declutter your space and
-                  contribute to a greener future. Embrace responsible electronic
-                  waste management with the EcoRecycle Pro today.
-                </AccordionContent>
+                <AccordionContent>{description}</AccordionContent>
               </AccordionItem>
             </Accordion>
             <p className="px-8 text-center text-sm text-muted-foreground">

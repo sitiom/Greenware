@@ -31,7 +31,9 @@ export async function getProductById(
   return await supabaseClient
     .from("products")
     .select("id, name, price, url, average_rating")
-    .eq("id", id);
+    .eq("id", id)
+    .limit(1)
+    .single();
 }
 
 export async function addProduct(

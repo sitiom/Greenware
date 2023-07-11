@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
@@ -36,28 +36,25 @@ export interface Database {
     Tables: {
       cart_products: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: number
           product_id: number | null
           profile_id: string | null
           quantity: number | null
-          total: number | null
         }
         Insert: {
-          created_at?: string | null
-          id: number
-          product_id?: number | null
-          profile_id?: string | null
-          quantity?: number | null
-          total?: number | null
-        }
-        Update: {
-          created_at?: string | null
+          created_at?: string
           id?: number
           product_id?: number | null
           profile_id?: string | null
           quantity?: number | null
-          total?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          product_id?: number | null
+          profile_id?: string | null
+          quantity?: number | null
         }
         Relationships: [
           {
@@ -81,7 +78,7 @@ export interface Database {
           profile_id: string | null
         }
         Insert: {
-          id: number
+          id?: number
           product_id?: number | null
           profile_id?: string | null
         }
@@ -108,19 +105,19 @@ export interface Database {
       line_items: {
         Row: {
           cart_prod_id: number | null
-          created_at: string | null
+          created_at: string
           id: number
           order_id: number | null
         }
         Insert: {
           cart_prod_id?: number | null
-          created_at?: string | null
-          id: number
+          created_at?: string
+          id?: number
           order_id?: number | null
         }
         Update: {
           cart_prod_id?: number | null
-          created_at?: string | null
+          created_at?: string
           id?: number
           order_id?: number | null
         }
@@ -141,19 +138,19 @@ export interface Database {
       }
       orders: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: number
           shipping_address_id: number | null
           status: string | null
         }
         Insert: {
-          created_at?: string | null
-          id: number
+          created_at?: string
+          id?: number
           shipping_address_id?: number | null
           status?: string | null
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           id?: number
           shipping_address_id?: number | null
           status?: string | null
@@ -163,35 +160,45 @@ export interface Database {
       products: {
         Row: {
           average_rating: number | null
-          created_at: string | null
+          created_at: string
           discount: number | null
           discount_price: number | null
           id: number
           name: string | null
           price: number | null
+          profile_id: string | null
           url: string | null
         }
         Insert: {
           average_rating?: number | null
-          created_at?: string | null
-          discount?: number | null
-          discount_price?: number | null
-          id: number
-          name?: string | null
-          price?: number | null
-          url?: string | null
-        }
-        Update: {
-          average_rating?: number | null
-          created_at?: string | null
+          created_at?: string
           discount?: number | null
           discount_price?: number | null
           id?: number
           name?: string | null
           price?: number | null
+          profile_id?: string | null
           url?: string | null
         }
-        Relationships: []
+        Update: {
+          average_rating?: number | null
+          created_at?: string
+          discount?: number | null
+          discount_price?: number | null
+          id?: number
+          name?: string | null
+          price?: number | null
+          profile_id?: string | null
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_profile_id_fkey"
+            columns: ["profile_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       profiles: {
         Row: {
@@ -226,7 +233,7 @@ export interface Database {
       }
       reviews: {
         Row: {
-          created_at: string | null
+          created_at: string
           description: string | null
           id: number
           product_id: number | null
@@ -235,16 +242,16 @@ export interface Database {
           title: string | null
         }
         Insert: {
-          created_at?: string | null
+          created_at?: string
           description?: string | null
-          id: number
+          id?: number
           product_id?: number | null
           profile_id?: string | null
           rating?: number | null
           title?: string | null
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           description?: string | null
           id?: number
           product_id?: number | null
@@ -270,7 +277,7 @@ export interface Database {
       salvaged_devices: {
         Row: {
           brand: string | null
-          created_at: string | null
+          created_at: string
           id: number
           is_working: boolean | null
           memory: string | null
@@ -282,8 +289,8 @@ export interface Database {
         }
         Insert: {
           brand?: string | null
-          created_at?: string | null
-          id: number
+          created_at?: string
+          id?: number
           is_working?: boolean | null
           memory?: string | null
           name?: string | null
@@ -294,7 +301,7 @@ export interface Database {
         }
         Update: {
           brand?: string | null
-          created_at?: string | null
+          created_at?: string
           id?: number
           is_working?: boolean | null
           memory?: string | null
@@ -315,15 +322,15 @@ export interface Database {
       }
       salvaged_parts: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: number
         }
         Insert: {
-          created_at?: string | null
-          id: number
+          created_at?: string
+          id?: number
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           id?: number
         }
         Relationships: []
@@ -333,7 +340,7 @@ export interface Database {
           address_line_one: string | null
           address_line_two: string | null
           barangay: string | null
-          created_at: string | null
+          created_at: string
           full_name: string | null
           id: number
           postal_code: number | null
@@ -345,9 +352,9 @@ export interface Database {
           address_line_one?: string | null
           address_line_two?: string | null
           barangay?: string | null
-          created_at?: string | null
+          created_at?: string
           full_name?: string | null
-          id: number
+          id?: number
           postal_code?: number | null
           profile_id?: string | null
           province?: string | null
@@ -357,7 +364,7 @@ export interface Database {
           address_line_one?: string | null
           address_line_two?: string | null
           barangay?: string | null
-          created_at?: string | null
+          created_at?: string
           full_name?: string | null
           id?: number
           postal_code?: number | null
@@ -574,4 +581,3 @@ export interface Database {
     }
   }
 }
-

@@ -1,32 +1,52 @@
+"use client";
+
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import {
   DropdownMenu,
+  DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { Session } from "@supabase/auth-helpers-nextjs";
+import {
+  Session,
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
+import { signOut } from "@/actions";
+import { LogOut, User } from "lucide-react";
+import { useTransition } from "react";
+import Link from "next/link";
+import { UserResponseSuccess } from "@/lib/queries";
 import { Database } from "@/lib/database.types";
-import LogoutMenuItem from "./LogoutMenuItem";
-
-type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+import { useRouter } from "next/navigation";
 
 interface NavAvatarProps {
   session: Session;
-  profile: Partial<Profile>;
+  profile: NonNullable<UserResponseSuccess>;
 }
 
 export default async function NavProfile({ session, profile }: NavAvatarProps) {
+  const router = useRouter();
+  const supabase = createClientComponentClient<Database>();
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+        <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
           <Avatar className="h-10 w-10">
             <AvatarImage src={profile.avatar_url ?? ""} />
             <AvatarFallback>
-              {profile.full_name?.[0].toUpperCase()}
+              {profile.full_name
+                ?.split(" ")
+                .map((name) => name.charAt(0))
+                .join("")
+                .toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -43,7 +63,16 @@ export default async function NavProfile({ session, profile }: NavAvatarProps) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <LogoutMenuItem />
+        <DropdownMenuItem asChild>
+          <Link href={`/user/${profile.id}`}>
+            <User className="mr-2 h-4 w-4" aria-hidden="true" />
+            Profile
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleSignOut}>
+          <LogOut className="mr-2 h-4 w-4" aria-hidden="true" />
+          Log out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

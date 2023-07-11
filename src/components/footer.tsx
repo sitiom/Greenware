@@ -6,7 +6,7 @@ import { ThemeToggle } from "./theme-toggle";
 
 export default function Footer() {
   return (
-    <footer className="sticky bg-slate-100 shadow-sm dark:bg-gray-900">
+    <footer className="sticky mt-auto border-t bg-slate-100 shadow-sm dark:bg-gray-900">
       <div className="container mx-auto px-6 py-8">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-3 xl:grid-cols-5">
           <div className="sm:col-span-2 lg:col-span-3 xl:col-span-2">
